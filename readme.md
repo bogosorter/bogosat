@@ -35,5 +35,10 @@ The atoms are converted from boolean variables into variables in the $[0, 1]$ ra
 
 These formulas can be differentiated to compute the gradient with respect to the atomic variables. The solver makes a step in the direction of the gradient until the formula is satisfied or the maximum number of steps is reached.
 
-There is just one last aspect to take care of. Let's suppose that we want to discover the solution to $p \land q$, starting with the assignment $p = q = 0$. 
-$\frac{\partial V(p) \cdot V(q)}{\partial V(p)} = V(q) = 0$. The same is valid for the gradient with respect to $q$. This means that the solver will not make any progress towards the solution. To avoid this, the solver adds a small value $\epsilon$ to the gradient, thus ensuring that it cannot be zero.
+There is just one last aspect to take care of. Let's suppose that we want to discover the solution to $p \land q$, starting with the assignment $p = q = 0$:
+
+$$
+\frac{\partial V(p) \cdot V(q)}{\partial V(p)} = V(q) = 0
+$$
+
+The same is valid for the gradient with respect to $q$. This means that the solver will not make any progress towards the solution. To avoid this, the solver adds a small value $\epsilon$ to the gradient, thus ensuring that it cannot be zero.
