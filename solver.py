@@ -13,17 +13,17 @@ class Solver():
 
             self.formula.backprop(1)
             self.formula.step(self.step)
-    
-    def print(self):
+
         if not self.solved():
-            print(f"Solution not found within {self.max_iterations} iterations.")
+            print(f'Solution not found within {self.max_iterations} iterations.')
             return
 
+        print('Solution found:')
         for atom in self.atoms:
             # Rounding does not cause a problem, since only the atoms that are
             # already rounded are important for the formula satisfiability
             atom.round()
-            print(f"{atom.name}: {atom.value}")
+            print(f'{atom.name} = {'True' if atom.value else 'False'}')
     
     def solved(self):
         return self.formula.evaluate() >= 1 - self.epsilon
