@@ -1,4 +1,6 @@
 class Solver():
+    epsilon = 1e-4
+
     def __init__(self, formula, *atoms, step = 0.01, max_iteraions = 1000000):
         self.formula = formula
         self.atoms = atoms
@@ -7,13 +9,13 @@ class Solver():
     
     def solve(self):
         for _ in range(self.max_iterations):
-            if self.formula.evaluate() == True: break
+            if self.solved(): break
 
             self.formula.backprop(1)
             self.formula.step(self.step)
     
     def print(self):
-        if self.formula.evaluate() != True:
+        if not self.solved():
             print(f"Solution not found within {self.max_iterations} iterations.")
             return
 
@@ -22,3 +24,6 @@ class Solver():
             # already rounded are important for the formula satisfiability
             atom.round()
             print(f"{atom.name}: {atom.value}")
+    
+    def solved(self):
+        return self.formula.evaluate() >= 1 - self.epsilon

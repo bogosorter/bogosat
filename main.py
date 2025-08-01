@@ -2,9 +2,11 @@ from atom import Atom
 from operators import Or, And, Not
 from solver import Solver
 
-p = Atom("p")
-formula = And(Not(p), p)
+a = Atom("a")
+b = Atom("b")
+c = Atom("c")
+formula = And(And(Or(a, b), Or(Not(a), c)), Or(Not(b), c))
 
-solver = Solver(formula, p)
+solver = Solver(formula, a, b, c)
 solver.solve()
 solver.print()
