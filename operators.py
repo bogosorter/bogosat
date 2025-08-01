@@ -29,3 +29,24 @@ class And():
     def step(self, value):
         self.left.step(value)
         self.right.step(value)
+
+class Or():
+    # This value is used to prevent stall gradients when both values are at zero
+    epsilon = 1e-4
+
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+    
+    def evaluate(self):
+        left = self.left.evaluate()
+        right = self.right.evaluate()
+        return left + right - left * right
+    
+    def backprop(self, value):
+        self.left.backprop(value * (1 - self.right.evaluate() + self.epsilon))
+        self.right.backprop(value * (1 - self.left.evaluate() + self.epsilon))
+
+    def step(self, value):
+        self.left.step(value)
+        self.right.step(value)

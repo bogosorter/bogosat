@@ -16,3 +16,6 @@ class Atom():
         self.value += self.gradient * size
         self.value = max(0, min(1, self.value))
         self.gradient = 0
+
+    def round(self):
+        self.value = round(self.value)

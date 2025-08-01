@@ -11,4 +11,7 @@ class Solver():
     
     def print(self):
         for proposition in self.propositions:
+            # Rounding does not cause a problem, since only the atoms that are
+            # already rounded are important for the formula satisfiability
+            proposition.round()
             print(f"{proposition.name}: {proposition.value}")
