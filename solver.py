@@ -12,4 +12,3 @@ class Solver():
     def print(self):
         for proposition in self.propositions:
             print(f"{proposition.name}: {proposition.value}")
-        print(f"Formula: {self.formula.evaluate()}")
