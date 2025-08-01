@@ -1,7 +1,7 @@
 class Solver():
-    def __init__(self, formula, propositions, step):
+    def __init__(self, formula, atoms, step):
         self.formula = formula
-        self.propositions = propositions
+        self.atoms = atoms
         self.step = step
     
     def solve(self):
@@ -10,8 +10,8 @@ class Solver():
             self.formula.step(self.step)
     
     def print(self):
-        for proposition in self.propositions:
+        for atom in self.atoms:
             # Rounding does not cause a problem, since only the atoms that are
             # already rounded are important for the formula satisfiability
-            proposition.round()
-            print(f"{proposition.name}: {proposition.value}")
+            atom.round()
+            print(f"{atom.name}: {atom.value}")
