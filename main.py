@@ -3,9 +3,8 @@ from operators import Or, And, Not
 from solver import Solver
 
 p = Atom("p")
-q = Atom("q")
-formula = And(Not(p), Or(p, q))
+formula = And(Not(p), p)
 
-solver = Solver(formula, [p, q], 0.01)
+solver = Solver(formula, p)
 solver.solve()
 solver.print()
