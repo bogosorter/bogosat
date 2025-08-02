@@ -31,7 +31,7 @@ class And():
         self.q.step(value)
 
 class Or():
-    # This value is used to prevent stall gradients when both values are at zero
+    # This value is used to prevent stall gradients
     epsilon = 1e-4
 
     def __init__(self, p, q):
@@ -50,3 +50,16 @@ class Or():
     def step(self, value):
         self.p.step(value)
         self.q.step(value)
+
+class Implies():
+    def __init__(self, p, q):
+        self.formula = Or(Not(p), q)
+    
+    def evaluate(self):
+        return self.formula.evaluate()
+
+    def backprop(self, value):
+        self.formula.backprop(value)
+    
+    def step(self, value):
+        self.formula.step(value)
